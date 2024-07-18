@@ -1,4 +1,6 @@
 sphinx
 sphinx_pdj_theme
 sphinx_rtd_theme
-sphinx-tabs
+sphinx-design
+myst-parser
+sphinx-copybutton

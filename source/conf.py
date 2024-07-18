@@ -14,7 +14,9 @@ release = '0'
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
-extensions = ['sphinx_rtd_theme', 'sphinx_tabs.tabs']
+extensions = ['sphinx_copybutton', 'myst_parser', 'sphinx_design', 'sphinx_rtd_theme']
+
+myst_enable_extensions = ["colon_fence"]
 
 templates_path = ['_templates']
 exclude_patterns = []
