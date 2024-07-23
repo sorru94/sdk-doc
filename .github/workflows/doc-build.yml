@@ -48,5 +48,13 @@ jobs:
         mkdir ./source/_static
         mkdir ./source/_templates
 
+    - name: Clean old documentation
+      run: make clean
+
     - name: Build HTML documentation
       run: make html
+
+    - name: Check differences
+      run: |
+        git add ./build/html/
+        git diff --cached --exit-code --name-only ./build/html/
