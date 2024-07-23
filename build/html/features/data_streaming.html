@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Data streaming &mdash; Astarte SDKs 0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=87e54e7c" />
+
+  
+    <link rel="shortcut icon" href="../_static/mascotte.svg"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=8dde47fa"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../_static/copybutton.js?v=f281be69"></script>
+        <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Properties" href="properties.html" />
+    <link rel="prev" title="Device connection" href="device_connection.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Astarte SDKs
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../get_started_unified.html">Getting started guide (Option 1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../get_started_mostly_unified.html">Getting started guide (Option 2)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../get_started_split.html">Getting started guide (Option 3)</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../features_split.html">Features (multiple-file)</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="device_id_generation.html">Device ID generation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="device_registration.html">Device registration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interfaces_parsing.html">Interfaces parsing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="device_connection.html">Device connection</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Data streaming</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#individual-data-transmission-and-reception">Individual data transmission and reception</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#aggregated-data-transmission-and-reception">Aggregated data transmission and reception</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#reliability-support">Reliability support</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data-persistence-and-automatic-retransmission">Data persistence and automatic retransmission</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="properties.html">Properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data_validation.html">Data Validation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../features_unified.html">Features (single-file)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api_docs.html">API documentation</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Astarte SDKs</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../features_split.html">Features (multiple-file)</a></li>
+      <li class="breadcrumb-item active">Data streaming</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/features/data_streaming.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="data-streaming">
+<h1>Data streaming<a class="headerlink" href="#data-streaming" title="Link to this heading"></a></h1>
+<p>Each Astarte device SDK can transmit and receive data to one of the interfaces present in its
+introspection.</p>
+<section id="individual-data-transmission-and-reception">
+<h2>Individual data transmission and reception<a class="headerlink" href="#individual-data-transmission-and-reception" title="Link to this heading"></a></h2>
+<p>Devices can transmit and receive data for individual interfaces.
+Depending on the language and framework used by the SDK it might be required to place the data to
+transmit in a dedicated structure.</p>
+</section>
+<section id="aggregated-data-transmission-and-reception">
+<h2>Aggregated data transmission and reception<a class="headerlink" href="#aggregated-data-transmission-and-reception" title="Link to this heading"></a></h2>
+<p>Devices can transmit and receive data for aggregated interfaces.
+Depending on the language and framework used by the SDK it might be required to place the data to
+transmit in a dedicated structure.</p>
+</section>
+<section id="reliability-support">
+<h2>Reliability support<a class="headerlink" href="#reliability-support" title="Link to this heading"></a></h2>
+<p>The devices ensure a level of reliability for all the data to transmitted or received. This level
+of reliability is specified in the interfaces definition and is implemented using MQTT QoS levels.</p>
+</section>
+<section id="data-persistence-and-automatic-retransmission">
+<h2>Data persistence and automatic retransmission<a class="headerlink" href="#data-persistence-and-automatic-retransmission" title="Link to this heading"></a></h2>
+<p>Astarte Device SDKs allow configuring persitence for high enough reliability levels. In case of
+connection loss data is stored to memory or disk (according to configuration) and they are
+automatically retransmitted as soon as the device is back online.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="device_connection.html" class="btn btn-neutral float-left" title="Device connection" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="properties.html" class="btn btn-neutral float-right" title="Properties" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Simone Orru.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

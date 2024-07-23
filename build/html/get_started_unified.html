@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Getting started guide (Option 1) &mdash; Astarte SDKs 0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=87e54e7c" />
+
+  
+    <link rel="shortcut icon" href="_static/mascotte.svg"/>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=8dde47fa"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="_static/copybutton.js?v=f281be69"></script>
+        <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Getting started guide (Option 2)" href="get_started_mostly_unified.html" />
+    <link rel="prev" title="Astarte device SDKs" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Astarte SDKs
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Getting started guide (Option 1)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#generating-a-device-id">Generating a device ID</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#registering-a-device">Registering a device</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#instantiating-and-connecting-a-new-device">Instantiating and connecting a new device</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#streaming-data">Streaming data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#streaming-individual-data">Streaming individual data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#streaming-aggregated-data">Streaming aggregated data</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#setting-and-unsetting-properties">Setting and unsetting properties</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="get_started_mostly_unified.html">Getting started guide (Option 2)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="get_started_split.html">Getting started guide (Option 3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="features_split.html">Features (multiple-file)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="features_unified.html">Features (single-file)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api_docs.html">API documentation</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Astarte SDKs</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Getting started guide (Option 1)</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/get_started_unified.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="getting-started-guide-option-1">
+<h1>Getting started guide (Option 1)<a class="headerlink" href="#getting-started-guide-option-1" title="Link to this heading"></a></h1>
+<p>All of the Astarte device SDKs are dependent on an Astarte instance running locally or remotely.
+As such, if you are not already familiar with setting up an Astarte instance we recommend reading
+the <a class="reference external" href="https://docs.astarte-platform.org/astarte/latest/001-intro_user.html">Astarte documentation</a>.
+Specifically the
+<a class="reference external" href="https://docs.astarte-platform.org/astarte/latest/010-astarte_in_5_minutes.html">Astarte in 5 minutes</a>
+page can help setting up quickly an instance of Astarte for testing purposes.</p>
+<p>Assuming a correctly configured Astarte instance is present, any of the Astarte device SDKs can be
+used to interact with it.</p>
+<section id="generating-a-device-id">
+<h2>Generating a device ID<a class="headerlink" href="#generating-a-device-id" title="Link to this heading"></a></h2>
+<p>A device ID will be required to uniquely identify a device in an Astarte instance.
+Some of the Astarte device SDKs provide utilities to generate a deterministic or random device
+identifier, in some cases based on hardware information.</p>
+<p>This step is only useful when registering a device using a JWT token and the provided Astarte device
+SDKs registration APIs. Registration of a device can also be performed outside the device in the
+Astarte instance. In such cases the device ID should be obtained via
+<a class="reference external" href="https://github.com/astarte-platform/astartectl">astartectl</a>, or the
+<a class="reference external" href="https://docs.astarte-platform.org/astarte/latest/015-astarte_dashboard.html">Astarte dashboard</a>.
+The device ID should then be loaded manually on the device.</p>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-0" name="sd-tab-set-0" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-0">
+C (ESP32)</label><div class="sd-tab-content docutils">
+<p>Generating a device ID from device MAC address and other hardware identification bits:</p>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="n">astarte_err_t</span><span class="w"> </span><span class="nf">astarte_hwid_get_id</span><span class="p">(</span><span class="o">&amp;</span><span class="n">hw_id</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-1" name="sd-tab-set-0" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-1">
+C++ (Qt5)</label><div class="sd-tab-content docutils">
+<p>Not supported.</p>
+</div>
+<input id="sd-tab-item-2" name="sd-tab-set-0" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-2">
+Elixir</label><div class="sd-tab-content docutils">
+<p>A device ID can be generate randomly:</p>
+<div class="highlight-elixir notranslate"><div class="highlight"><pre><span></span><span class="n">device_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">:crypto</span><span class="o">.</span><span class="n">strong_rand_bytes</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">Base</span><span class="o">.</span><span class="n">url_encode64</span><span class="p">(</span><span class="ss">padding</span><span class="p">:</span><span class="w"> </span><span class="no">false</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Or in a deterministic way:</p>
+<div class="highlight-elixir notranslate"><div class="highlight"><pre><span></span><span class="n">device_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">UUID</span><span class="o">.</span><span class="n">uuid5</span><span class="p">(</span><span class="n">namespace_uuid</span><span class="p">,</span><span class="w"> </span><span class="n">payload</span><span class="p">,</span><span class="w"> </span><span class="ss">:raw</span><span class="p">)</span>
+<span class="w">    </span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">Astarte.Core.Device</span><span class="o">.</span><span class="n">encode_device_id</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-3" name="sd-tab-set-0" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-3">
+Go</label><div class="sd-tab-content docutils">
+<p>A device ID can be generate randomly:</p>
+<div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="nx">random_id</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">GenerateRandomAstarteId</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Or in a deterministic way:</p>
+<div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="nx">namespaced_id</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">GetNamespacedAstarteDeviceID</span><span class="p">(</span><span class="nx">namespaceUuid</span><span class="p">,</span><span class="nx">payload</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-4" name="sd-tab-set-0" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-4">
+Java/Android</label><div class="sd-tab-content docutils">
+<p>A device ID can be generate randomly:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">String</span><span class="w"> </span><span class="n">randomID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">AstarteDeviceIdUtils</span><span class="p">.</span><span class="na">generateId</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>Or in a deterministic way:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">String</span><span class="w"> </span><span class="n">deviceID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">AstarteDeviceIdUtils</span><span class="p">.</span><span class="na">generateId</span><span class="p">(</span><span class="n">namespaceUuid</span><span class="p">,</span><span class="w"> </span><span class="n">payload</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-5" name="sd-tab-set-0" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-5">
+Python</label><div class="sd-tab-content docutils">
+<p>Not supported.</p>
+</div>
+<input id="sd-tab-item-6" name="sd-tab-set-0" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-6">
+Rust</label><div class="sd-tab-content docutils">
+<p>A device ID can be generate randomly:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="kd">let</span><span class="w"> </span><span class="n">random_uuid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">astarte_sdk</span><span class="p">::</span><span class="n">registration</span><span class="p">::</span><span class="n">generate_random_uuid</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>Or in a deterministic way:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="kd">let</span><span class="w"> </span><span class="n">namespaced_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">astarte_sdk</span><span class="p">::</span><span class="n">registration</span><span class="p">::</span><span class="n">generate_uuid</span><span class="p">(</span><span class="n">namespaceUuid</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">payload</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="registering-a-device">
+<h2>Registering a device<a class="headerlink" href="#registering-a-device" title="Link to this heading"></a></h2>
+<p>In order for a device to connect to Astarte a registration procedure is required. This registration
+will produce a device specific credential secret that will be used when connecting to Astarte.
+Some of the Astarte device SDKs provide utilities to perform a device registration directly on
+the device. Those APIs will require a registration JWT to be uploaded to the device. Such JWT should
+be discarded following the registration procedure.</p>
+<p>This step is only useful when registering the device through the APIs using the JWT token.
+Registration of a device can also be performed outside the device in the Astarte instance using
+tools such as <a class="reference external" href="https://github.com/astarte-platform/astartectl">astartectl</a>, the
+<a class="reference external" href="https://docs.astarte-platform.org/astarte/latest/015-astarte_dashboard.html">Astarte dashboard</a>,
+or the dedicated
+<a class="reference external" href="https://docs.astarte-platform.org/astarte/latest/api/index.html?urls.primaryName=Pairing%20API">Astarte API for device registration</a>.
+The generated credential secret should then be loaded manually on the device.</p>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-7" name="sd-tab-set-1" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-7">
+C (ESP32)</label><div class="sd-tab-content docutils">
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="n">astarte_pairing_config</span><span class="w"> </span><span class="n">cfg</span><span class="w"> </span><span class="o">=</span>
+<span class="p">{</span>
+<span class="p">.</span><span class="n">base_url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">base_astarte_url</span><span class="p">;</span>
+<span class="p">.</span><span class="n">jwt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">jwt_token</span><span class="p">;</span>
+<span class="p">.</span><span class="n">realm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">realm</span><span class="p">;</span>
+<span class="p">.</span><span class="n">hw_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">device_id</span><span class="p">;</span>
+<span class="p">.</span><span class="n">credentials_secret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">credentials_secret</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="n">astarte_err_t</span><span class="w"> </span><span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">astarte_pairing_register_device</span><span class="p">(</span><span class="o">&amp;</span><span class="n">astarte_pairing_config</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-8" name="sd-tab-set-1" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-8">
+C++ (Qt5)</label><div class="sd-tab-content docutils">
+<p>Registration is done on device instantiation, see the next section.</p>
+</div>
+<input id="sd-tab-item-9" name="sd-tab-set-1" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-9">
+Elixir</label><div class="sd-tab-content docutils">
+<div class="highlight-elixir notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p">%{</span><span class="ss">body</span><span class="p">:</span><span class="w"> </span><span class="p">%{</span><span class="s2">&quot;data&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">%{</span><span class="s2">&quot;credentials_secret&quot;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">credentials_secret</span><span class="p">}}}}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Agent</span><span class="o">.</span><span class="n">register_device</span><span class="p">(</span><span class="n">client</span><span class="p">,</span><span class="w"> </span><span class="n">device_id</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-10" name="sd-tab-set-1" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-10">
+Go</label><div class="sd-tab-content docutils">
+<div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="nx">credentials_secret</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">client</span><span class="p">.</span><span class="nx">Pairing</span><span class="p">.</span><span class="nx">RegisterDevice</span><span class="p">(</span><span class="nx">realm</span><span class="p">,</span><span class="w"> </span><span class="nx">deviceID</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-11" name="sd-tab-set-1" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-11">
+Java/Android</label><div class="sd-tab-content docutils">
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">AstartePairingService</span><span class="w"> </span><span class="n">astartePairingService</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">AstartePairingService</span><span class="p">(</span><span class="n">pairing_url</span><span class="p">,</span><span class="w"> </span><span class="n">realm</span><span class="p">);</span>
+<span class="n">String</span><span class="w"> </span><span class="n">credentialsSecret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">astartePairingService</span><span class="p">.</span><span class="na">registerDevice</span><span class="p">(</span><span class="n">jwt_token</span><span class="p">,</span><span class="w"> </span><span class="n">device_id</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-12" name="sd-tab-set-1" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-12">
+Python</label><div class="sd-tab-content docutils">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">credentials_secret</span> <span class="o">=</span> <span class="n">register_device_with_jwt_token</span><span class="p">(</span><span class="n">device_id</span><span class="p">,</span> <span class="n">realm</span><span class="p">,</span> <span class="n">jwt_token</span><span class="p">,</span> <span class="n">pairing_base_url</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-13" name="sd-tab-set-1" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-13">
+Rust</label><div class="sd-tab-content docutils">
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="kd">let</span><span class="w"> </span><span class="n">credentials_secret</span><span class="w"> </span><span class="o">=</span>
+<span class="w">    </span><span class="n">astarte_sdk</span><span class="p">::</span><span class="n">registration</span><span class="p">::</span><span class="n">register_device</span><span class="p">(</span><span class="o">&amp;</span><span class="n">jwt_token</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">pairing_url</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">realm</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">device_id</span><span class="p">)</span>
+<span class="w">        </span><span class="p">.</span><span class="k">await</span><span class="o">?</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="instantiating-and-connecting-a-new-device">
+<h2>Instantiating and connecting a new device<a class="headerlink" href="#instantiating-and-connecting-a-new-device" title="Link to this heading"></a></h2>
+<p>Now that we obtained both a device ID and a credential secret we can create a new device instance.
+Some of the SDKs will connect instantly as soon as the device is instantiated while others will
+require a call to a <code class="docutils literal notranslate"><span class="pre">connect</span></code> function.
+Furthermore, depending on the SDK the introspection of the device might be defined while
+instantiating the device or between instantiation and connection.</p>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-14" name="sd-tab-set-2" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-14">
+C (ESP32)</label><div class="sd-tab-content docutils">
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="c1">// Instantiating a device</span>
+<span class="n">astarte_device_config_t</span><span class="w"> </span><span class="n">cfg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">.</span><span class="n">data_event_callback</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">astarte_data_events_handler</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">unset_event_callback</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">astarte_unset_events_handler</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">connection_event_callback</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">astarte_connection_events_handler</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">disconnection_event_callback</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">astarte_disconnection_events_handler</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">credentials_secret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cred_sec</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">hwid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hwid</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">realm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">realm</span><span class="p">,</span>
+<span class="p">};</span>
+<span class="n">astarte_device_handle_t</span><span class="w"> </span><span class="n">device</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">astarte_device_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">cfg</span><span class="p">);</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">device</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">ESP_LOGE</span><span class="p">(</span><span class="n">TAG</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Failed to init astarte device&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="c1">// Adding an interface</span>
+<span class="n">astarte_device_add_interface</span><span class="p">(</span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">device_example_interface</span><span class="p">);</span>
+<span class="c1">// Starting a device</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">astarte_device_start</span><span class="p">(</span><span class="n">device</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">ASTARTE_OK</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">ESP_LOGE</span><span class="p">(</span><span class="n">TAG</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Failed to start astarte device&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-15" name="sd-tab-set-2" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-15">
+C++ (Qt5)</label><div class="sd-tab-content docutils">
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="c1">// Instantiating a device and declaring the introspection</span>
+<span class="n">m_sdk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">AstarteDeviceSDK</span><span class="p">(</span><span class="n">QDir</span><span class="o">::</span><span class="n">currentPath</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">QStringLiteral</span><span class="p">(</span><span class="s">&quot;./examples/device_sdk.conf&quot;</span><span class="p">).</span><span class="n">arg</span><span class="p">(</span><span class="n">deviceId</span><span class="p">),</span><span class="w"> </span><span class="n">QDir</span><span class="o">::</span><span class="n">currentPath</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">QStringLiteral</span><span class="p">(</span><span class="s">&quot;./examples/interfaces&quot;</span><span class="p">),</span><span class="w"> </span><span class="n">deviceId</span><span class="p">.</span><span class="n">toLatin1</span><span class="p">());</span>
+<span class="c1">// Connecting to the Astarte instance</span>
+<span class="n">connect</span><span class="p">(</span><span class="n">m_sdk</span><span class="o">-&gt;</span><span class="n">init</span><span class="p">(),</span><span class="w"> </span><span class="o">&amp;</span><span class="n">Hemera</span><span class="o">::</span><span class="n">Operation</span><span class="o">::</span><span class="n">finished</span><span class="p">,</span><span class="w"> </span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">AstarteStreamQt5Test</span><span class="o">::</span><span class="n">checkInitResult</span><span class="p">);</span>
+<span class="c1">// Setting data handlers</span>
+<span class="n">connect</span><span class="p">(</span><span class="n">m_sdk</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">AstarteDeviceSDK</span><span class="o">::</span><span class="n">dataReceived</span><span class="p">,</span><span class="w"> </span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">AstarteStreamQt5Test</span><span class="o">::</span><span class="n">handleIncomingData</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-16" name="sd-tab-set-2" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-16">
+Elixir</label><div class="sd-tab-content docutils">
+<div class="highlight-elixir notranslate"><div class="highlight"><pre><span></span><span class="c1"># declare device options</span>
+<span class="n">opts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="ss">pairing_url</span><span class="p">:</span><span class="w"> </span><span class="n">pairing_url</span><span class="p">,</span><span class="w"> </span><span class="ss">realm</span><span class="p">:</span><span class="w"> </span><span class="n">realm</span><span class="p">,</span><span class="w"> </span><span class="ss">device_id</span><span class="p">:</span><span class="w"> </span><span class="n">device_id</span><span class="p">,</span><span class="w"> </span><span class="ss">interface_provider</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;./examples/interfaces&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">credentials_secret</span><span class="p">:</span><span class="w"> </span><span class="n">credentials_secret</span><span class="p">]</span>
+
+<span class="c1"># start device and connect asynchronously</span>
+<span class="p">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="n">pid</span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Device</span><span class="o">.</span><span class="n">start_link</span><span class="p">(</span><span class="n">opts</span><span class="p">)</span>
+
+<span class="c1"># blocking (optional)</span>
+<span class="ss">:ok</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nc">Device</span><span class="o">.</span><span class="n">wait_for_connection</span><span class="p">(</span><span class="n">device_pid</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-17" name="sd-tab-set-2" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-17">
+Go</label><div class="sd-tab-content docutils">
+<div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="c1">// Create device</span>
+<span class="nx">d</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">device</span><span class="p">.</span><span class="nx">NewDevice</span><span class="p">(</span><span class="nx">deviceID</span><span class="p">,</span><span class="w"> </span><span class="nx">deviceRealm</span><span class="p">,</span><span class="w"> </span><span class="nx">credentialsSecret</span><span class="p">,</span><span class="w"> </span><span class="nx">apiEndpoint</span><span class="p">)</span>
+<span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">err</span><span class="p">.</span><span class="nx">Error</span><span class="p">())</span>
+<span class="w">    </span><span class="nx">os</span><span class="p">.</span><span class="nx">Exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1">// Load interface - fix this path(s) to load the right interface</span>
+<span class="nx">byteValue</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">ioutil</span><span class="p">.</span><span class="nx">ReadFile</span><span class="p">(</span><span class="s">&quot;/examples/interfaces/com.example.Interface.json&quot;</span><span class="p">)</span>
+<span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">err</span><span class="p">.</span><span class="nx">Error</span><span class="p">())</span>
+<span class="w">    </span><span class="nx">os</span><span class="p">.</span><span class="nx">Exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="nx">iface</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">interfaces</span><span class="p">.</span><span class="nx">AstarteInterface</span><span class="p">{}</span>
+<span class="k">if</span><span class="w"> </span><span class="nx">iface</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">interfaces</span><span class="p">.</span><span class="nx">ParseInterface</span><span class="p">(</span><span class="nx">byteValue</span><span class="p">);</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">err</span><span class="p">.</span><span class="nx">Error</span><span class="p">())</span>
+<span class="w">    </span><span class="nx">os</span><span class="p">.</span><span class="nx">Exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">d</span><span class="p">.</span><span class="nx">AddInterface</span><span class="p">(</span><span class="nx">iface</span><span class="p">);</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">err</span><span class="p">.</span><span class="nx">Error</span><span class="p">())</span>
+<span class="w">    </span><span class="nx">os</span><span class="p">.</span><span class="nx">Exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1">// Set up callbacks</span>
+<span class="nx">d</span><span class="p">.</span><span class="nx">OnConnectionStateChanged</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">d</span><span class="w"> </span><span class="o">*</span><span class="nx">device</span><span class="p">.</span><span class="nx">Device</span><span class="p">,</span><span class="w"> </span><span class="nx">state</span><span class="w"> </span><span class="kt">bool</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;Device connection state: %t\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">state</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1">// Connect the device and listen to the connection status channel</span>
+<span class="nx">c</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nb">make</span><span class="p">(</span><span class="kd">chan</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span>
+<span class="nx">d</span><span class="p">.</span><span class="nx">Connect</span><span class="p">(</span><span class="nx">c</span><span class="p">)</span>
+<span class="k">if</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">&lt;-</span><span class="nx">c</span><span class="p">;</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">nil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;Connected successfully&quot;</span><span class="p">)</span>
+<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">err</span><span class="p">.</span><span class="nx">Error</span><span class="p">())</span>
+<span class="w">    </span><span class="nx">os</span><span class="p">.</span><span class="nx">Exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-18" name="sd-tab-set-2" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-18">
+Java/Android</label><div class="sd-tab-content docutils">
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">// Device creation</span>
+<span class="c1">// connectionSource allows to connect to a db for persistency</span>
+<span class="c1">// The interfaces supported by the device are populated by ExampleInterfaceProvider</span>
+<span class="n">AstarteDevice</span><span class="w"> </span><span class="n">device</span><span class="w"> </span><span class="o">=</span>
+<span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">AstarteGenericDevice</span><span class="p">(</span>
+<span class="w">        </span><span class="n">deviceId</span><span class="p">,</span>
+<span class="w">        </span><span class="n">realm</span><span class="p">,</span>
+<span class="w">        </span><span class="n">credentialsSecret</span><span class="p">,</span>
+<span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="n">ExampleInterfaceProvider</span><span class="p">(),</span>
+<span class="w">        </span><span class="n">pairingUrl</span><span class="p">,</span>
+<span class="w">        </span><span class="n">connectionSource</span><span class="p">);</span>
+
+<span class="c1">// ExampleMessageListener listens for device connection, disconnection and failure.</span>
+<span class="n">device</span><span class="p">.</span><span class="na">setAstarteMessageListener</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">ExampleMessageListener</span><span class="p">());</span>
+
+<span class="c1">// Connect the device</span>
+<span class="n">device</span><span class="p">.</span><span class="na">connect</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-19" name="sd-tab-set-2" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-19">
+Python</label><div class="sd-tab-content docutils">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># declare device options</span>
+<span class="n">device</span> <span class="o">=</span> <span class="n">Device</span><span class="p">(</span><span class="n">device_id</span><span class="p">,</span> <span class="n">realm</span><span class="p">,</span> <span class="n">credentials_secret</span><span class="p">,</span> <span class="n">pairing_base_url</span><span class="p">)</span>
+
+<span class="c1"># load device interfaces</span>
+<span class="n">device</span><span class="o">.</span><span class="n">add_interface</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="s2">&quot;/examples/interfaces/com.example.Interface.json&quot;</span><span class="p">))</span>
+
+<span class="c1">#register a callback that will be invoked everytime the device successfully connects</span>
+<span class="n">device</span><span class="o">.</span><span class="n">on_connected</span><span class="p">(</span><span class="n">callback</span><span class="p">)</span>
+
+<span class="c1">#connect the device asynchronously</span>
+<span class="n">device</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-20" name="sd-tab-set-2" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-20">
+Rust</label><div class="sd-tab-content docutils">
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="c1">// declare device options</span>
+<span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">sdk_options</span><span class="w"> </span><span class="o">=</span>
+<span class="w">    </span><span class="n">AstarteOptions</span><span class="p">::</span><span class="n">new</span><span class="p">(</span><span class="o">&amp;</span><span class="n">realm</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">device_id</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">credentials_secret</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">pairing_url</span><span class="p">);</span>
+
+<span class="c1">// load interfaces from a directory</span>
+<span class="n">sdk_options</span>
+<span class="w">    </span><span class="p">.</span><span class="n">add_interface_files</span><span class="p">(</span><span class="s">&quot;./examples/interfaces&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">.</span><span class="n">unwrap</span><span class="p">();</span>
+
+<span class="c1">// instance and connect the device.</span>
+<span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">device</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">AstarteDeviceSdk</span><span class="p">::</span><span class="n">new</span><span class="p">(</span><span class="o">&amp;</span><span class="n">sdk_options</span><span class="p">).</span><span class="k">await</span><span class="p">.</span><span class="n">unwrap</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="streaming-data">
+<h2>Streaming data<a class="headerlink" href="#streaming-data" title="Link to this heading"></a></h2>
+<p>All Astarte Device SDKs include primitives for sending data to a remote Astarte instance.
+Streaming of data could be performed for device owned interfaces of <code class="docutils literal notranslate"><span class="pre">individual</span></code> or <code class="docutils literal notranslate"><span class="pre">object</span></code>
+aggregation type.</p>
+<section id="streaming-individual-data">
+<h3>Streaming individual data<a class="headerlink" href="#streaming-individual-data" title="Link to this heading"></a></h3>
+<p>In Astarte interfaces with <code class="docutils literal notranslate"><span class="pre">individual</span></code> aggregation, each mapping is treated as an independent value
+and is managed individually.</p>
+<p>The snippet bellow shows how to send a value that will be inserted into the <code class="docutils literal notranslate"><span class="pre">&quot;/test0/value&quot;</span></code>
+datastream which is defined by <code class="docutils literal notranslate"><span class="pre">&quot;/%{sensor_id}/value&quot;</span></code> parametric endpoint, that is part of
+<code class="docutils literal notranslate"><span class="pre">&quot;org.astarte-platform.genericsensors.Values&quot;</span></code> datastream interface.</p>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-21" name="sd-tab-set-3" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-21">
+C (ESP32)</label><div class="sd-tab-content docutils">
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span><span class="w"> </span><span class="nc">timeval</span><span class="w"> </span><span class="n">tv</span><span class="p">;</span>
+<span class="n">gettimeofday</span><span class="p">(</span><span class="o">&amp;</span><span class="n">tv</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span>
+<span class="kt">uint64_t</span><span class="w"> </span><span class="n">ts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tv</span><span class="o">-&gt;</span><span class="n">tv_sec</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">1000</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">tv</span><span class="o">-&gt;</span><span class="n">tv_usec</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">1000</span><span class="p">;</span>
+
+<span class="n">astarte_err_t</span><span class="w"> </span><span class="n">err</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">astarte_device_stream_double_with_timestamp</span><span class="p">(</span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;org.astarte-platform.genericsensors.Values&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;/test0/value&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">0.3</span><span class="p">,</span><span class="w"> </span><span class="n">ts</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-22" name="sd-tab-set-3" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-22">
+C++ (Qt5)</label><div class="sd-tab-content docutils">
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">m_sdk</span><span class="o">-&gt;</span><span class="n">sendData</span><span class="p">(</span><span class="s">&quot;org.astarte-platform.genericsensors.Values&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;/test0/value&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">0.3</span><span class="p">,</span><span class="w"> </span><span class="n">QDateTime</span><span class="o">::</span><span class="n">currentDateTime</span><span class="p">());</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-23" name="sd-tab-set-3" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-23">
+Elixir</label><div class="sd-tab-content docutils">
+<div class="highlight-elixir notranslate"><div class="highlight"><pre><span></span><span class="nc">Device</span><span class="o">.</span><span class="n">send_datastream</span><span class="p">(</span><span class="n">pid</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;org.astarte-platform.genericsensors.Values&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;/test0/value&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">0.3</span><span class="p">,</span><span class="w"> </span><span class="ss">timestamp</span><span class="p">:</span><span class="w"> </span><span class="nc">DateTime</span><span class="o">.</span><span class="n">utc_now</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-24" name="sd-tab-set-3" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-24">
+Go</label><div class="sd-tab-content docutils">
+<div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="nx">d</span><span class="p">.</span><span class="nx">SendIndividualMessageWithTimestamp</span><span class="p">(</span><span class="s">&quot;org.astarte-platform.genericsensors.Values&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;/test0/value&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">0.3</span><span class="p">,</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">Now</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-25" name="sd-tab-set-3" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-25">
+Java/Android</label><div class="sd-tab-content docutils">
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">genericSensorsValuesInterface</span><span class="p">.</span><span class="na">streamData</span><span class="p">(</span><span class="s">&quot;/test0/value&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">0.3</span><span class="p">,</span><span class="w"> </span><span class="n">DateTime</span><span class="p">.</span><span class="na">now</span><span class="p">());</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-26" name="sd-tab-set-3" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-26">
+Python</label><div class="sd-tab-content docutils">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">device</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s2">&quot;org.astarte-platform.genericsensors.Values&quot;</span><span class="p">,</span> <span class="s2">&quot;/test0/value&quot;</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="n">timestamp</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-27" name="sd-tab-set-3" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-27">
+Rust</label><div class="sd-tab-content docutils">
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="sd">/// send data without an explicit timestamp</span>
+<span class="n">device</span><span class="p">.</span><span class="n">send</span><span class="p">(</span><span class="s">&quot;org.astarte-platform.genericsensors.Values&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;/test0/value&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">).</span><span class="k">await</span><span class="o">?</span><span class="p">;</span>
+
+<span class="sd">/// send data with an explicit timestamp</span>
+<span class="kd">let</span><span class="w"> </span><span class="n">timestamp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Utc</span><span class="p">.</span><span class="n">timestamp</span><span class="p">(</span><span class="mi">1537449422</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="n">device</span><span class="p">.</span><span class="n">send_with_timestamp</span><span class="p">(</span><span class="s">&quot;org.astarte-platform.genericsensors.Values&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;/test0/value&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="n">timestamp</span><span class="p">).</span><span class="k">await</span><span class="o">?</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="streaming-aggregated-data">
+<h3>Streaming aggregated data<a class="headerlink" href="#streaming-aggregated-data" title="Link to this heading"></a></h3>
+<p>In Astarte interfaces with <code class="docutils literal notranslate"><span class="pre">object</span></code> aggregation, Astarte expects the owner to send all of the
+interface’s mappings at the same time, packed in a single message.</p>
+<p>The following snippet shows how to send a value for an object aggregated interface. In this
+examples, <code class="docutils literal notranslate"><span class="pre">lat</span></code> and <code class="docutils literal notranslate"><span class="pre">long</span></code> will be sent together and will be inserted into the <code class="docutils literal notranslate"><span class="pre">&quot;/coords&quot;</span></code>
+datastream which is defined by the <code class="docutils literal notranslate"><span class="pre">&quot;/coords&quot;</span></code> endpoint, that is part of <code class="docutils literal notranslate"><span class="pre">&quot;com.example.GPS&quot;</span></code>
+datastream interface.</p>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-28" name="sd-tab-set-4" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-28">
+C (ESP32)</label><div class="sd-tab-content docutils">
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="n">astarte_bson_serializer_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">bs</span><span class="p">);</span>
+<span class="n">astarte_bson_serializer_append_double</span><span class="p">(</span><span class="o">&amp;</span><span class="n">bs</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;lat&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">45.409627</span><span class="p">);</span>
+<span class="n">astarte_bson_serializer_append_double</span><span class="p">(</span><span class="o">&amp;</span><span class="n">bs</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;long&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">11.8765254</span><span class="p">);</span>
+<span class="n">astarte_bson_serializer_append_end_of_document</span><span class="p">(</span><span class="o">&amp;</span><span class="n">bs</span><span class="p">);</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">size</span><span class="p">;</span>
+<span class="k">const</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">coord</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">astarte_bson_serializer_get_document</span><span class="p">(</span><span class="o">&amp;</span><span class="n">bs</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">size</span><span class="p">);</span>
+
+<span class="k">struct</span><span class="w"> </span><span class="nc">timeval</span><span class="w"> </span><span class="n">tv</span><span class="p">;</span>
+<span class="n">gettimeofday</span><span class="p">(</span><span class="o">&amp;</span><span class="n">tv</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span>
+<span class="kt">uint64_t</span><span class="w"> </span><span class="n">ts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tv</span><span class="o">-&gt;</span><span class="n">tv_sec</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">1000</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">tv</span><span class="o">-&gt;</span><span class="n">tv_usec</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">1000</span><span class="p">;</span>
+
+<span class="n">astarte_device_stream_aggregate_with_timestamp</span><span class="p">(</span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;com.example.GPS&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;/coords&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">coords</span><span class="p">,</span><span class="w"> </span><span class="n">ts</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-29" name="sd-tab-set-4" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-29">
+C++ (Qt5)</label><div class="sd-tab-content docutils">
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">QVariantHash</span><span class="w"> </span><span class="n">coords</span><span class="p">;</span>
+<span class="n">coords</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">QStringLiteral</span><span class="p">(</span><span class="s">&quot;lat&quot;</span><span class="p">),</span><span class="w"> </span><span class="mf">45.409627</span><span class="p">);</span>
+<span class="n">coords</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">QStringLiteral</span><span class="p">(</span><span class="s">&quot;long&quot;</span><span class="p">),</span><span class="w"> </span><span class="mf">11.8765254</span><span class="p">);</span>
+<span class="n">m_sdk</span><span class="o">-&gt;</span><span class="n">sendData</span><span class="p">(</span><span class="s">&quot;com.example.GPS&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;/coords&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">coords</span><span class="p">,</span><span class="w"> </span><span class="n">QDateTime</span><span class="o">::</span><span class="n">currentDateTime</span><span class="p">());</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-30" name="sd-tab-set-4" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-30">
+Elixir</label><div class="sd-tab-content docutils">
+<div class="highlight-elixir notranslate"><div class="highlight"><pre><span></span><span class="n">coords</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">%{</span><span class="ss">lat</span><span class="p">:</span><span class="w"> </span><span class="mf">45.409627</span><span class="p">,</span><span class="w"> </span><span class="ss">long</span><span class="p">:</span><span class="w"> </span><span class="mf">11.8765254</span><span class="p">}</span>
+<span class="nc">Device</span><span class="o">.</span><span class="n">send_datastream</span><span class="p">(</span><span class="n">pid</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;com.example.GPS&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;/coords&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">coords</span><span class="p">,</span><span class="w"> </span><span class="ss">timestamp</span><span class="p">:</span><span class="w"> </span><span class="nc">DateTime</span><span class="o">.</span><span class="n">utc_now</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-31" name="sd-tab-set-4" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-31">
+Go</label><div class="sd-tab-content docutils">
+<div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="nx">coords</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="nx">double</span><span class="p">{</span><span class="s">&quot;lat&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">45.409627</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;long&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">11.8765254</span><span class="p">}</span>
+<span class="nx">d</span><span class="p">.</span><span class="nx">SendAggregateMessageWithTimestamp</span><span class="p">(</span><span class="s">&quot;com.example.GPS&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;/coords&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">coords</span><span class="p">,</span><span class="w"> </span><span class="nx">time</span><span class="p">.</span><span class="nx">Now</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-32" name="sd-tab-set-4" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-32">
+Java/Android</label><div class="sd-tab-content docutils">
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">Double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">coords</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">Double</span><span class="o">&gt;</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">put</span><span class="p">(</span><span class="s">&quot;lat&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">45.409627</span><span class="p">);</span>
+<span class="w">        </span><span class="n">put</span><span class="p">(</span><span class="s">&quot;long&quot;</span><span class="p">,</span><span class="w"> </span><span class="mf">11.8765254</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">};</span>
+
+<span class="n">exampleGPSInterface</span><span class="p">.</span><span class="na">streamData</span><span class="p">(</span><span class="s">&quot;/coords&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">coords</span><span class="p">,</span><span class="w"> </span><span class="n">DateTime</span><span class="p">.</span><span class="na">now</span><span class="p">());</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-33" name="sd-tab-set-4" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-33">
+Python</label><div class="sd-tab-content docutils">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">coords</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;lat&#39;</span><span class="p">:</span> <span class="mf">45.409627</span><span class="p">,</span> <span class="s1">&#39;long&#39;</span><span class="p">:</span> <span class="mf">11.8765254</span><span class="p">}</span>
+<span class="n">device</span><span class="o">.</span><span class="n">send_aggregate</span><span class="p">(</span><span class="s2">&quot;com.example.GPS&quot;</span><span class="p">,</span> <span class="s2">&quot;/coords&quot;</span><span class="p">,</span> <span class="n">coords</span><span class="p">,</span> <span class="n">timestamp</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-34" name="sd-tab-set-4" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-34">
+Rust</label><div class="sd-tab-content docutils">
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">use</span><span class="w"> </span><span class="n">astarte_device_sdk_derive</span><span class="p">::</span><span class="n">AstarteAggregate</span><span class="p">;</span>
+<span class="sd">/// Coords must derive AstarteAggregate</span>
+<span class="cp">#[derive(AstarteAggregate)]</span>
+<span class="k">struct</span><span class="w"> </span><span class="nc">Coords</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">lat</span><span class="p">:</span><span class="w"> </span><span class="kt">f64</span><span class="p">,</span>
+<span class="w">    </span><span class="n">long</span><span class="p">:</span><span class="w"> </span><span class="kt">f64</span><span class="p">,</span>
+<span class="p">}</span>
+<span class="p">[</span><span class="o">..</span><span class="p">.]</span>
+<span class="kd">let</span><span class="w"> </span><span class="n">coords</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Coords</span><span class="p">{</span><span class="n">lat</span><span class="p">:</span><span class="w">  </span><span class="mf">45.409627</span><span class="p">,</span><span class="w"> </span><span class="n">long</span><span class="p">:</span><span class="w"> </span><span class="mf">11.8765254</span><span class="p">};</span>
+
+<span class="c1">// stream data with an explicit timestamp</span>
+<span class="kd">let</span><span class="w"> </span><span class="n">timestamp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Utc</span><span class="p">.</span><span class="n">timestamp</span><span class="p">(</span><span class="mi">1537449422</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="n">device</span><span class="p">.</span><span class="n">send_object_with_timestamp</span><span class="p">(</span><span class="s">&quot;com.example.GPS&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;/coords&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">coords</span><span class="p">,</span><span class="w"> </span><span class="n">timestamp</span><span class="p">).</span><span class="k">await</span><span class="o">?</span><span class="p">;</span>
+
+<span class="c1">// stream data without an explicit timestamp</span>
+<span class="n">device</span><span class="p">.</span><span class="n">send_object</span><span class="p">(</span><span class="s">&quot;com.example.GPS&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;/coords&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">coords</span><span class="p">).</span><span class="k">await</span><span class="o">?</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="setting-and-unsetting-properties">
+<h2>Setting and unsetting properties<a class="headerlink" href="#setting-and-unsetting-properties" title="Link to this heading"></a></h2>
+<p>Interfaces of <code class="docutils literal notranslate"><span class="pre">property</span></code> type represent a persistent, stateful, synchronized state with no concept
+of history or timestamping. From a programming point of view, setting and unsetting properties of
+device-owned interface is rather similar to sending messages on datastream interfaces.</p>
+<p>The following snippet shows how to set a value that will be inserted into the <code class="docutils literal notranslate"><span class="pre">&quot;/sensor0/name&quot;</span></code>
+property which is defined by <code class="docutils literal notranslate"><span class="pre">&quot;/%{sensor_id}/name&quot;</span></code> parametric endpoint, that is part of <code class="docutils literal notranslate"><span class="pre">&quot;org.astarte-platform.genericsensors.AvailableSensors&quot;</span></code> device-owned properties interface.</p>
+<p>It should be noted how a property should be marked as unsettable in its interface definition to
+be able to use the unsetting method on it.</p>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-35" name="sd-tab-set-5" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-35">
+C (ESP32)</label><div class="sd-tab-content docutils">
+<p>Set property:</p>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="n">astarte_device_set_string_property</span><span class="p">(</span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;org.astarte-platform.genericsensors.AvailableSensors&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;/sensor0/name&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;foobar&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Unset property:</p>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="n">astarte_device_unset_path</span><span class="p">(</span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;org.astarte-platform.genericsensors.AvailableSensors&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;/sensor0/name&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-36" name="sd-tab-set-5" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-36">
+C++ (Qt5)</label><div class="sd-tab-content docutils">
+<p>Set property:</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">m_sdk</span><span class="o">-&gt;</span><span class="n">sendData</span><span class="p">(</span><span class="n">m_interface</span><span class="p">,</span><span class="w"> </span><span class="n">m_path</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="p">,</span><span class="w"> </span><span class="n">QDateTime</span><span class="o">::</span><span class="n">currentDateTime</span><span class="p">());</span>
+</pre></div>
+</div>
+<p>Unset property:</p>
+<div class="highlight-C++ notranslate"><div class="highlight"><pre><span></span><span class="n">m_sdk</span><span class="o">-&gt;</span><span class="n">sendUnset</span><span class="p">(</span><span class="n">m_interface</span><span class="p">,</span><span class="w"> </span><span class="n">m_path</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-37" name="sd-tab-set-5" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-37">
+Elixir</label><div class="sd-tab-content docutils">
+<p>Set property:</p>
+<div class="highlight-elixir notranslate"><div class="highlight"><pre><span></span><span class="nc">Device</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="n">pid</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;org.astarte-platform.genericsensors.AvailableSensors&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;/sensor0/name&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;foobar&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Unset property:</p>
+<div class="highlight-elixir notranslate"><div class="highlight"><pre><span></span><span class="nc">Device</span><span class="o">.</span><span class="n">unset_property</span><span class="p">(</span><span class="n">pid</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;org.astarte-platform.genericsensors.AvailableSensors&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;/sensor0/name&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-38" name="sd-tab-set-5" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-38">
+Go</label><div class="sd-tab-content docutils">
+<p>Set property:</p>
+<div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="nx">d</span><span class="p">.</span><span class="nx">SetProperty</span><span class="p">(</span><span class="s">&quot;org.astarte-platform.genericsensors.AvailableSensors&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;/sensor0/name&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;foobar&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Unset property:</p>
+<div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="nx">d</span><span class="p">.</span><span class="nx">UnsetProperty</span><span class="p">(</span><span class="s">&quot;org.astarte-platform.genericsensors.AvailableSensors&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;/sensor0/name&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-39" name="sd-tab-set-5" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-39">
+Java/Android</label><div class="sd-tab-content docutils">
+<p>Set property:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">availableSensorsInterface</span><span class="p">.</span><span class="na">setProperty</span><span class="p">(</span><span class="s">&quot;/sensor0/name&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;foobar&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Unset property:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">propertyInterface</span><span class="p">.</span><span class="na">unsetProperty</span><span class="p">(</span><span class="s">&quot;/sensor0/name&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-40" name="sd-tab-set-5" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-40">
+Python</label><div class="sd-tab-content docutils">
+<p>Set property:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">device</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s2">&quot;org.astarte-platform.genericsensors.AvailableSensors&quot;</span><span class="p">,</span> <span class="s2">&quot;/sensor0/name&quot;</span><span class="p">,</span> <span class="s2">&quot;foobar&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Unset property:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">device</span><span class="o">.</span><span class="n">unset_property</span><span class="p">(</span><span class="s2">&quot;org.astarte-platform.genericsensors.AvailableSensors&quot;</span><span class="p">,</span> <span class="s2">&quot;/sensor0/name&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-41" name="sd-tab-set-5" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-41">
+Rust</label><div class="sd-tab-content docutils">
+<p>Set property:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="n">device</span><span class="p">.</span><span class="n">send</span><span class="p">(</span><span class="s">&quot;org.astarte-platform.genericsensors.AvailableSensors&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;/sensor0/name&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;foobar&quot;</span><span class="p">).</span><span class="k">await</span><span class="o">?</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Unset property:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="n">device</span><span class="p">.</span><span class="n">unset</span><span class="p">(</span><span class="s">&quot;org.astarte-platform.genericsensors.AvailableSensors&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;/sensor0/name&quot;</span><span class="p">).</span><span class="k">await</span><span class="o">?</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Astarte device SDKs" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="get_started_mostly_unified.html" class="btn btn-neutral float-right" title="Getting started guide (Option 2)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Simone Orru.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Features (single-file) &mdash; Astarte SDKs 0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=87e54e7c" />
+
+  
+    <link rel="shortcut icon" href="_static/mascotte.svg"/>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=8dde47fa"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="_static/copybutton.js?v=f281be69"></script>
+        <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="API documentation" href="api_docs.html" />
+    <link rel="prev" title="Data Validation" href="features/data_validation.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Astarte SDKs
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="get_started_unified.html">Getting started guide (Option 1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="get_started_mostly_unified.html">Getting started guide (Option 2)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="get_started_split.html">Getting started guide (Option 3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="features_split.html">Features (multiple-file)</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Features (single-file)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#device-id-generation">Device ID generation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#device-registration">Device registration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#on-board-device-registration">On board device registration</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#interfaces-parsing">Interfaces parsing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#device-connection">Device connection</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#server-tls-certificates-support">Server TLS certificates support</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#client-tls-certificate-support">Client TLS certificate support</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#client-tls-certificate-renewal">Client TLS certificate renewal</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#reconnection">Reconnection</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#data-streaming">Data streaming</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#individual-data-transmission-and-reception">Individual data transmission and reception</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#aggregated-data-transmission-and-reception">Aggregated data transmission and reception</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#reliability-support">Reliability support</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data-persistence-and-automatic-retransmission">Data persistence and automatic retransmission</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#properties">Properties</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#setting-unsetting-device-properties">Setting/unsetting device properties</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#setting-unsetting-server-properties">Setting/unsetting server properties</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#properties-presistency">Properties presistency</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#data-validation">Data Validation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api_docs.html">API documentation</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Astarte SDKs</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Features (single-file)</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/features_unified.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="features-single-file">
+<h1>Features (single-file)<a class="headerlink" href="#features-single-file" title="Link to this heading"></a></h1>
+<p>A set of possible features supported by the SDKs is presented in this section.
+Each Astarte device SDK implements a slighly different set of features. While some might be
+common to all the SDKs, others might be more relevant to some programming language or framework
+and subequently be only implemented in a set of SDKs.</p>
+<nav class="contents local" id="comprehensive-list-of-features-for-the-astarte-device-sdks">
+<p class="topic-title">Comprehensive list of features for the Astarte device SDKs:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#device-id-generation" id="id1">Device ID generation</a></p></li>
+<li><p><a class="reference internal" href="#device-registration" id="id2">Device registration</a></p>
+<ul>
+<li><p><a class="reference internal" href="#on-board-device-registration" id="id3">On board device registration</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#interfaces-parsing" id="id4">Interfaces parsing</a></p></li>
+<li><p><a class="reference internal" href="#device-connection" id="id5">Device connection</a></p>
+<ul>
+<li><p><a class="reference internal" href="#server-tls-certificates-support" id="id6">Server TLS certificates support</a></p></li>
+<li><p><a class="reference internal" href="#client-tls-certificate-support" id="id7">Client TLS certificate support</a></p></li>
+<li><p><a class="reference internal" href="#client-tls-certificate-renewal" id="id8">Client TLS certificate renewal</a></p></li>
+<li><p><a class="reference internal" href="#reconnection" id="id9">Reconnection</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#data-streaming" id="id10">Data streaming</a></p>
+<ul>
+<li><p><a class="reference internal" href="#individual-data-transmission-and-reception" id="id11">Individual data transmission and reception</a></p></li>
+<li><p><a class="reference internal" href="#aggregated-data-transmission-and-reception" id="id12">Aggregated data transmission and reception</a></p></li>
+<li><p><a class="reference internal" href="#reliability-support" id="id13">Reliability support</a></p></li>
+<li><p><a class="reference internal" href="#data-persistence-and-automatic-retransmission" id="id14">Data persistence and automatic retransmission</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#properties" id="id15">Properties</a></p>
+<ul>
+<li><p><a class="reference internal" href="#setting-unsetting-device-properties" id="id16">Setting/unsetting device properties</a></p></li>
+<li><p><a class="reference internal" href="#setting-unsetting-server-properties" id="id17">Setting/unsetting server properties</a></p></li>
+<li><p><a class="reference internal" href="#properties-presistency" id="id18">Properties presistency</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#data-validation" id="id19">Data Validation</a></p></li>
+</ul>
+</nav>
+<section id="device-id-generation">
+<h2><a class="toc-backref" href="#id1" role="doc-backlink">Device ID generation</a><a class="headerlink" href="#device-id-generation" title="Link to this heading"></a></h2>
+<p>An Astarte instance identifies each device through an unique identifier.
+Some of the Astarte device SDKs provide utilities to generate a device ID in a deterministic or
+random manner. Some SDKs can extract information from the hardware to generate an unique identifier.
+For more information regarding the device ID format can be found in the
+<a class="reference external" href="https://docs.astarte-platform.org/astarte/latest/010-design_principles.html#device-id">Astarte documentation</a>.</p>
+</section>
+<section id="device-registration">
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">Device registration</a><a class="headerlink" href="#device-registration" title="Link to this heading"></a></h2>
+<p>Registering a new device to the an Astarte instance can be performed in two ways:</p>
+<ol class="arabic simple">
+<li><p>Using the registration utilities in the Astarte instance itself. Such utilities will produce
+a credential secret. Such credential secret can then be transferred to the device an used to
+connect to Astarte.</p></li>
+<li><p>Using the on board registration utilities. This device APIs require an authorization JWT
+generated in the Astarte instance and then transferred to the device. The registration APIs
+will use the JWT token to negotiate a credential secret from the Astarte instance.</p></li>
+</ol>
+<p>Both methods will require a valid device ID to perform the registration.</p>
+<section id="on-board-device-registration">
+<h3><a class="toc-backref" href="#id3" role="doc-backlink">On board device registration</a><a class="headerlink" href="#on-board-device-registration" title="Link to this heading"></a></h3>
+<p>Registering the device is performed using the
+<a class="reference external" href="https://docs.astarte-platform.org/astarte/latest/api/index.html?urls.primaryName=Pairing%20API#/agent/registerDevice">Astarte API for device registration</a>.</p>
+</section>
+</section>
+<section id="interfaces-parsing">
+<h2><a class="toc-backref" href="#id4" role="doc-backlink">Interfaces parsing</a><a class="headerlink" href="#interfaces-parsing" title="Link to this heading"></a></h2>
+<p>The Astarte device SDKs are capable of parsing interfaces definitions expressed in a <code class="docutils literal notranslate"><span class="pre">.json</span></code> format.
+All the interfaces definitions provided to a device make up the introspection of such device.
+Each device will communicate its introspection to Astarte during the connection phase.</p>
+<p>For more information regarding the definition of interfaces see the
+<a class="reference external" href="https://docs.astarte-platform.org/astarte/latest/030-interface.html">Astarte documentation</a>.</p>
+</section>
+<section id="device-connection">
+<h2><a class="toc-backref" href="#id5" role="doc-backlink">Device connection</a><a class="headerlink" href="#device-connection" title="Link to this heading"></a></h2>
+<p>Astarte device SDKs make use of platform specific MQTT libraries and they hide all MQTTs connection
+management details.</p>
+<p>Astarte devices connect to the remote Astarte instance using mutual TLS authentication.</p>
+<section id="server-tls-certificates-support">
+<h3><a class="toc-backref" href="#id6" role="doc-backlink">Server TLS certificates support</a><a class="headerlink" href="#server-tls-certificates-support" title="Link to this heading"></a></h3>
+<p>Server authentication is performed using a TLS certificate, as such each device will need to
+include a set of root certificates in order to properly verify the server certificate.</p>
+</section>
+<section id="client-tls-certificate-support">
+<h3><a class="toc-backref" href="#id7" role="doc-backlink">Client TLS certificate support</a><a class="headerlink" href="#client-tls-certificate-support" title="Link to this heading"></a></h3>
+<p>Client authentication is performed using a TLS certificate issued by the Astarte instance.
+This certificate is obtained through the
+<a class="reference external" href="https://docs.astarte-platform.org/astarte/latest/api/index.html?urls.primaryName=Pairing%20API#/device/obtainCredentials">Astarte API for device credentials</a>.
+Each device will generate a certificate signing request and the Astarte instance will issue a
+corresponding x509 certificate.</p>
+</section>
+<section id="client-tls-certificate-renewal">
+<h3><a class="toc-backref" href="#id8" role="doc-backlink">Client TLS certificate renewal</a><a class="headerlink" href="#client-tls-certificate-renewal" title="Link to this heading"></a></h3>
+<p>Each device SDK is responsible to check the validity of its certificate using the appropriate
+<a class="reference external" href="https://docs.astarte-platform.org/astarte/latest/api/index.html?urls.primaryName=Pairing%20API#/device/obtainCredentials">Astarte API for device credentials validation</a>.</p>
+<p>Renewal of the certificate can be performed by requesting a fresh certificate to Astarte.</p>
+</section>
+<section id="reconnection">
+<h3><a class="toc-backref" href="#id9" role="doc-backlink">Reconnection</a><a class="headerlink" href="#reconnection" title="Link to this heading"></a></h3>
+<p>Astarte device SDKs implement an internal reconnection strategy that uses an exponential backoff
+to avoid network overloading.</p>
+</section>
+</section>
+<section id="data-streaming">
+<h2><a class="toc-backref" href="#id10" role="doc-backlink">Data streaming</a><a class="headerlink" href="#data-streaming" title="Link to this heading"></a></h2>
+<p>Each Astarte device SDK can transmit and receive data to one of the interfaces present in its
+introspection.</p>
+<section id="individual-data-transmission-and-reception">
+<h3><a class="toc-backref" href="#id11" role="doc-backlink">Individual data transmission and reception</a><a class="headerlink" href="#individual-data-transmission-and-reception" title="Link to this heading"></a></h3>
+<p>Devices can transmit and receive data for individual interfaces.
+Depending on the language and framework used by the SDK it might be required to place the data to
+transmit in a dedicated structure.</p>
+</section>
+<section id="aggregated-data-transmission-and-reception">
+<h3><a class="toc-backref" href="#id12" role="doc-backlink">Aggregated data transmission and reception</a><a class="headerlink" href="#aggregated-data-transmission-and-reception" title="Link to this heading"></a></h3>
+<p>Devices can transmit and receive data for aggregated interfaces.
+Depending on the language and framework used by the SDK it might be required to place the data to
+transmit in a dedicated structure.</p>
+</section>
+<section id="reliability-support">
+<h3><a class="toc-backref" href="#id13" role="doc-backlink">Reliability support</a><a class="headerlink" href="#reliability-support" title="Link to this heading"></a></h3>
+<p>The devices ensure a level of reliability for all the data to transmitted or received. This level
+of reliability is specified in the interfaces definition and is implemented using MQTT QoS levels.</p>
+</section>
+<section id="data-persistence-and-automatic-retransmission">
+<h3><a class="toc-backref" href="#id14" role="doc-backlink">Data persistence and automatic retransmission</a><a class="headerlink" href="#data-persistence-and-automatic-retransmission" title="Link to this heading"></a></h3>
+<p>Astarte Device SDKs allow configuring persitence for high enough reliability levels. In case of
+connection loss data is stored to memory or disk (according to configuration) and they are
+automatically retransmitted as soon as the device is back online.</p>
+</section>
+</section>
+<section id="properties">
+<h2><a class="toc-backref" href="#id15" role="doc-backlink">Properties</a><a class="headerlink" href="#properties" title="Link to this heading"></a></h2>
+<p>Astarte has support for the concept of properties, which are kept synchronized between the server
+and the device.</p>
+<section id="setting-unsetting-device-properties">
+<h3><a class="toc-backref" href="#id16" role="doc-backlink">Setting/unsetting device properties</a><a class="headerlink" href="#setting-unsetting-device-properties" title="Link to this heading"></a></h3>
+<p>Device properties can be set in each device and each value change is communicated to the Astarte
+instance.
+Unsetting properties will be allowed only for properties are defined as unsettable in their
+interface definition.</p>
+</section>
+<section id="setting-unsetting-server-properties">
+<h3><a class="toc-backref" href="#id17" role="doc-backlink">Setting/unsetting server properties</a><a class="headerlink" href="#setting-unsetting-server-properties" title="Link to this heading"></a></h3>
+<p>Server properties are property of the Astarte instance and can’t be modified by the device.
+However they can be added to the device introspection and any change for their value will be
+communicated to the device.
+Unsetting properties will be allowed only for properties are defined as unsettable in their
+interface definition.</p>
+</section>
+<section id="properties-presistency">
+<h3><a class="toc-backref" href="#id18" role="doc-backlink">Properties presistency</a><a class="headerlink" href="#properties-presistency" title="Link to this heading"></a></h3>
+<p>Astarte device SDKs store in persistent memory their owned properties.
+This ensures a correct synchronization between Astarte and the device in cases of re-connections.</p>
+</section>
+</section>
+<section id="data-validation">
+<h2><a class="toc-backref" href="#id19" role="doc-backlink">Data Validation</a><a class="headerlink" href="#data-validation" title="Link to this heading"></a></h2>
+<p>The Astarte device SDKs validate user data before transmission, hence errors are reported locally
+on the device improving troubleshooting experience.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="features/data_validation.html" class="btn btn-neutral float-left" title="Data Validation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="api_docs.html" class="btn btn-neutral float-right" title="API documentation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Simone Orru.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
