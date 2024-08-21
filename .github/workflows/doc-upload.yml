@@ -27,19 +27,19 @@ jobs:
         name: html-doc
         github-token: ${{ secrets.GH_PAT }}
         path: ./html
-    # - name: Copy Docs
+    # - name: Copy generated docs
     #   run: |
-    #     export DOCS_DIRNAME="device-sdks/esp32/$(echo ${{ github.ref }} | sed 's,refs/heads/,,' | sed 's/master/snapshot/g' | sed 's/release-//g')/api"
-    #     rm -rf docs/$DOCS_DIRNAME
-    #     mkdir -p docs/$DOCS_DIRNAME
-    #     cp -r astarte-device-sdk-esp32/doc/out/html/* docs/$DOCS_DIRNAME/
+    #     rm -rf docs/device-sdks/general
+    #     mkdir -p docs/device-sdks/general
+    #     cp -r html docs/device-sdks/general
+    #     ln -s docs/device-sdks/general/index.html docs/device-sdks/index.html
     # - name: Commit files
     #   working-directory: ./docs
     #   run: |
     #     git config --local user.email "astarte-machine@ispirata.com"
     #     git config --local user.name "Astarte Bot"
     #     git add .
-    #     git commit -m "Update ESP32 SDK documentation"
+    #     git commit -m "Update general SDK documentation"
     # - name: Push changes
     #   working-directory: ./docs
     #   run: |
