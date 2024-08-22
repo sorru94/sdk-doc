@@ -1,0 +1,35 @@
+# Copyright 2024 SECO Mind Srl
+#
+# SPDX-License-Identifier: CC0-1.0
+
+name: Documentation build (HTML)
+
+on: [workflow_call]
+
+jobs:
+  doc-build-html:
+    name: "Documentation build (HTML)"
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    concurrency:
+      group: doc-build-html-${{ github.ref }}
+      cancel-in-progress: true
+    steps:
+    - name: Checkout SDK documentation
+      uses: actions/checkout@v4
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: 3.12
+    - name: Install Python dependencies
+      run: pip install -r requirements.txt
+    - name: Create empty directories
+      run: mkdir ./source/_templates
+    - name: Generate additional links for the SDKs APIs documentation
+      run: python link_api_docs.py
+    - name: Build HTML documentation
+      run: make html
+    - uses: actions/upload-artifact@v4
+      with:
+        name: html-doc
+        path: ./build/html

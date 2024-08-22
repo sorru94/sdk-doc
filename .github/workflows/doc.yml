@@ -1,0 +1,24 @@
+# Copyright 2024 SECO Mind Srl
+#
+# SPDX-License-Identifier: CC0-1.0
+
+name: Documentation
+
+on:
+  pull_request:
+  push:
+    branches: [master]
+
+concurrency:
+  group: documentation-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  doc-build-html:
+    name: "Documentation build (HTML)"
+    uses: ./.github/workflows/doc-build.yml
+  doc-upload-html:
+    name: "Documentation upload (HTML)"
+    if: github.ref == 'refs/heads/master'
+    needs: [doc-build-html]
+    uses: ./.github/workflows/doc-upload.yml

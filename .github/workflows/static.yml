@@ -1,0 +1,30 @@
+# Copyright 2024 SECO Mind Srl
+#
+# SPDX-License-Identifier: CC0-1.0
+
+name: Static analysis
+
+on: [pull_request, push]
+
+jobs:
+  run-static:
+    name: "Run static analysis"
+    runs-on: ubuntu-latest
+    concurrency:
+      group: run-black-${{ github.ref }}
+      cancel-in-progress: true
+    steps:
+    - name: Checkout Astarte documentation
+      uses: actions/checkout@v4
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: 3.12
+    - name: Install Python dependencies
+      run: pip install -r requirements.txt
+    - name: Run formatter
+      run: python -m black --line-length 100 --check ./*.py
+    - name: Check imports order (all sources)
+      uses: isort/isort-action@v1
+    - name: Run pylint
+      run: python -m pylint --rcfile=./.pylintrc ./*.py

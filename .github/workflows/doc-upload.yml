@@ -1,0 +1,46 @@
+# Copyright 2024 SECO Mind Srl
+#
+# SPDX-License-Identifier: CC0-1.0
+
+name: Documentation upload (HTML)
+
+on: [workflow_call]
+
+jobs:
+  doc-upload-html:
+    name: "Documentation upload (HTML)"
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    concurrency:
+      group: doc-upload-html-${{ github.ref }}
+      cancel-in-progress: true
+    steps:
+    - name: Checkout Astarte documentation
+      uses: actions/checkout@v4
+      with:
+        repository: astarte-platform/docs
+        ssh-key: ${{ secrets.DOCS_DEPLOY_KEY }}
+        path: docs
+    - name: Download the html doc artifact
+      uses: actions/download-artifact@v4
+      with:
+        name: html-doc
+        github-token: ${{ secrets.GH_PAT }}
+        path: ./html
+    # - name: Copy generated docs
+    #   run: |
+    #     rm -rf docs/device-sdks/general
+    #     mkdir -p docs/device-sdks/general
+    #     cp -r html docs/device-sdks/general
+    #     ln -s docs/device-sdks/general/index.html docs/device-sdks/index.html
+    # - name: Commit files
+    #   working-directory: ./docs
+    #   run: |
+    #     git config --local user.email "astarte-machine@ispirata.com"
+    #     git config --local user.name "Astarte Bot"
+    #     git add .
+    #     git commit -m "Update general SDK documentation"
+    # - name: Push changes
+    #   working-directory: ./docs
+    #   run: |
+    #     git push origin master
