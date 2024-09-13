@@ -19,7 +19,7 @@ jobs:
       uses: actions/checkout@v4
       with:
         repository: astarte-platform/docs
-        ssh-key: ${{ secrets.DOCS_DEPLOY_KEY }}
+        ssh-key: ${{ secrets.SDK_DOC_DEPLOY_KEY }}
         path: docs
     - name: Download the html doc artifact
       uses: actions/download-artifact@v4
@@ -27,20 +27,37 @@ jobs:
         name: html-doc
         github-token: ${{ secrets.GH_PAT }}
         path: ./html
-    # - name: Copy generated docs
-    #   run: |
-    #     rm -rf docs/device-sdks/general
-    #     mkdir -p docs/device-sdks/general
-    #     cp -r html docs/device-sdks/general
-    #     ln -s docs/device-sdks/general/index.html docs/device-sdks/index.html
-    # - name: Commit files
-    #   working-directory: ./docs
-    #   run: |
-    #     git config --local user.email "astarte-machine@ispirata.com"
-    #     git config --local user.name "Astarte Bot"
-    #     git add .
-    #     git commit -m "Update general SDK documentation"
-    # - name: Push changes
-    #   working-directory: ./docs
-    #   run: |
-    #     git push origin master
+    - name: Copy generated docs
+      run: |
+        rm -rf docs/device-sdks/common
+        mkdir -p docs/device-sdks/common
+        cp -r html/* docs/device-sdks/common
+    - name: Update index redirect
+      working-directory: ./docs/device-sdks/
+      run: |
+        echo '<!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta http-equiv="refresh" content="0; url=common">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Redirecting...</title>
+            <script type="text/javascript">
+                window.location.href = 'common';
+            </script>
+        </head>
+        <body>
+            <p>If you are not redirected, <a href="common">click here</a>.</p>
+        </body>
+        </html>' > index.html
+    - name: Commit files
+      working-directory: ./docs
+      run: |
+        git config --local user.email "astarte-machine-sdk@ispirata.com"
+        git config --local user.name "Astarte Bot"
+        git add .
+        git diff-index --quiet HEAD || git commit -m "Update common SDK documentation"
+    - name: Push changes
+      working-directory: ./docs
+      run: |
+        git push

@@ -38,7 +38,7 @@ def get_api_docs_urls():
         Repo.clone_from("https://github.com/astarte-platform/docs.git", docs_dir)
         api_docs = {}
         for api_docs_dir in docs_dir.joinpath("device-sdks").iterdir():
-            if api_docs_dir.is_dir():
+            if api_docs_dir.is_dir() and api_docs_dir.name != "common":
                 for release_dir in api_docs_dir.iterdir():
                     if release_dir.name not in ["latest", "snapshot"]:
                         api_docs.setdefault(api_docs_dir.name, []).append(release_dir.name)
