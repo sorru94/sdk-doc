@@ -22,3 +22,4 @@ jobs:
     if: github.ref == 'refs/heads/master'
     needs: [doc-build-html]
     uses: ./.github/workflows/doc-upload.yml
+    secrets: inherit

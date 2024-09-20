@@ -14,4 +14,5 @@ The APIs documentation can be found here:
 ```{toctree}
 :maxdepth: 1
 Rust APIs <https://docs.rs/astarte-device-sdk/latest/astarte_device_sdk/>
+Go APIs <https://pkg.go.dev/github.com/astarte-platform/astarte-device-sdk-go/>
 ```
