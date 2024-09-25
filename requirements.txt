@@ -3,14 +3,14 @@
 # SPDX-License-Identifier: CC0-1.0
 
 # Dependencies for sphinx
-sphinx
-furo
-myst-parser
-sphinx-copybutton
+sphinx==8.0.2
+furo==2024.8.6
+myst-parser==4.0.0
+sphinx-copybutton==0.5.2
 # sphinx-inline-tabs (could be useful if we need tabs)
 
 # Dependencies for the generation scripts
-gitpython
-pylint
-black
-isort
+gitpython==3.1.43
+pylint==3.3.0
+black==24.8.0
+isort==5.13.2
