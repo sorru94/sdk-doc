@@ -40,7 +40,7 @@ def get_api_docs_urls():
         for api_docs_dir in docs_dir.joinpath("device-sdks").iterdir():
             if api_docs_dir.is_dir() and api_docs_dir.name != "common":
                 for release_dir in api_docs_dir.iterdir():
-                    if release_dir.name not in ["latest", "snapshot"]:
+                    if release_dir.name not in ["latest"]:
                         api_docs.setdefault(api_docs_dir.name, []).append(release_dir.name)
                 api_docs[api_docs_dir.name].sort()
 
@@ -72,7 +72,9 @@ def generate_exernal_sub_toctree_entry(base_url: str, platform: str, release: st
     Returns:
       str: The toctree entry.
     """
-    return f"{platform.capitalize()} v{release} APIs <{base_url}/{platform}/{release}/api>\n"
+
+    prefix = "v" if release != "snapshot" else ""
+    return f"{platform.capitalize()} {prefix}{release} APIs <{base_url}/{platform}/{release}/api>\n"
 
 
 platform_md_template = Template(
